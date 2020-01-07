@@ -6,6 +6,7 @@ import Footer from './components/Footer';
 import Showcase from './components/Showcase';
 import StaticNavBar from './components/StaticNavBar';
 import Beatmap from './components/Beatmap';
+import SearchBar from './components/SearchBar';
 import './index.css';
 import {
 	BrowserRouter as Router,
@@ -22,6 +23,9 @@ function App() {
 			<Switch>
 				<Route path="/beatmap">
 					<BeatmapStats />
+				</Route>
+				<Route>
+					<SearchBar/>
 				</Route>
 				<Route path='/'>
 					<Home />

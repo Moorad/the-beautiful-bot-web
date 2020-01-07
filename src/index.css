@@ -13,7 +13,7 @@ html, body {
 	width: 100%;
 	position: fixed;
 	display: none;
-	top:0
+	top:0	
 }
 
 .static-nav {
@@ -44,7 +44,7 @@ html, body {
 	margin: 0 25%;
 }
 
-.title {
+.title, .beatmap-title{
 	font-family: Baloo Bhai;
 	font-size: 2.5rem;
 }
@@ -54,12 +54,22 @@ html, body {
 	font-size: 1.5rem;
 } 
 
+.beatmap-title {
+	margin-bottom: 0;
+}
+
+.beatmap-sub-title {
+	font-size: 1.2rem;
+	font-family: Rubik;
+	margin: 1rem 0;
+}
+
 .main-logo {
 	width:18rem;
 	border-radius: 50%;
 	display: block;
 	margin: auto;
-	border: 6px solid rgb(109, 131, 255);
+	border: 6px solid #6d83ff;
 }
 
 .beatmap-img {
@@ -70,6 +80,51 @@ html, body {
 	border:2px solid white;
 }
 
+.search-bar {
+	display: block;
+	margin: auto;
+	width: calc(100% - 4rem);
+	border:2px solid #242d47;
+	font-size: 1.2rem;
+	padding: 1rem 2rem;
+	color: white;
+	background-color: #242d47;
+	border-radius: 10px;
+	outline: none;
+}
+
+.search-bar:focus {
+	border-color: #6d83ff;
+}
+
+.search-option {
+	background-color: #242d47;
+	width:50%;
+	display: inline-block;
+	text-align: center;
+}
+
 .center {
 	text-align: center;
+}
+
+.right {
+	float:right;
+}
+
+.special {
+	background-color: #6d83ff;
+}
+
+.progress-bar-container {
+	display: inline-block;
+	width: 30%;
+	height: 12px;
+	background-color: rgba(255,255,255,0.2);
+	border-radius: 8px;
+}
+
+.progress-bar {
+	height: 12px;
+	border-radius: 8px;
 }
