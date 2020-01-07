@@ -1,0 +1,62 @@
+html, body {
+	overflow-x:hidden;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #141927;
+	color:white;
+}
+
+.nav {
+	margin: 0;
+	background-color: #242d47;
+	height: 2rem;
+	width: 100%;
+	position: fixed;
+	display: none;
+}
+
+.static-nav {
+	margin: 1rem;
+	height:5rem;
+}
+
+.nav-item {
+	display: inline-block;
+	background-color: #242d47;
+	padding: 1rem;
+	margin-right: 1rem;
+}
+
+.nav-item a {
+	color: white;
+	text-decoration: none;
+}
+
+.section {
+	margin: 0 3rem;
+}
+
+.tight-section {
+	margin: 0 25%;
+}
+
+.title {
+	font-family: Baloo Bhai;
+	font-size: 2.5rem;
+}
+
+
+.main-logo {
+	width:18rem;
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+	border: 6px solid rgb(109, 131, 255);
+}
+
+.beatmap-img {
+	display: block;
+	width:100%;
+	margin: auto;
+	border-radius: 100px 0 100px 0;
+}
