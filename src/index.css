@@ -13,6 +13,7 @@ html, body {
 	width: 100%;
 	position: fixed;
 	display: none;
+	top:0
 }
 
 .static-nav {
@@ -22,18 +23,21 @@ html, body {
 
 .nav-item {
 	display: inline-block;
-	background-color: #242d47;
-	padding: 1rem;
+	
+	padding: 0.8rem 1.4rem;
 	margin-right: 1rem;
-}
-
-.nav-item a {
 	color: white;
 	text-decoration: none;
+	border-radius: 4px;
+}
+
+.current {
+	background-color: #242d47;
 }
 
 .section {
 	margin: 0 3rem;
+	min-height: 100vh;
 }
 
 .tight-section {
@@ -45,6 +49,10 @@ html, body {
 	font-size: 2.5rem;
 }
 
+.sub-title {
+	font-family: Baloo Bhai;
+	font-size: 1.5rem;
+} 
 
 .main-logo {
 	width:18rem;
@@ -59,4 +67,9 @@ html, body {
 	width:100%;
 	margin: auto;
 	border-radius: 100px 0 100px 0;
+	border:2px solid white;
+}
+
+.center {
+	text-align: center;
 }

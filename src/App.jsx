@@ -37,7 +37,7 @@ function Home() {
 			<div className='section'>
 				<MainTBB />
 			</div>
-			<div className='section'>
+			<div className='tight-section'>
 				<About />
 				<Showcase title='Title' url='https://via.placeholder.com/1280x720' description='Hello this is a description' />
 				<Showcase title='Title' url='https://via.placeholder.com/1280x720' description='Hello this is a description' />
