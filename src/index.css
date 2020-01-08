@@ -118,7 +118,7 @@ html, body {
 
 .progress-bar-container {
 	display: inline-block;
-	width: 30%;
+	width: 70%;
 	height: 12px;
 	background-color: rgba(255,255,255,0.2);
 	border-radius: 8px;
@@ -127,4 +127,19 @@ html, body {
 .progress-bar {
 	height: 12px;
 	border-radius: 8px;
+}
+
+.two-section {
+	display:inline-block;
+	width:50%;
+}
+
+.three-sections {
+	display:inline-block;
+	width:33%;
+}
+
+.aimSpeedStrain * {
+	display: block;
+	margin: auto;
 }

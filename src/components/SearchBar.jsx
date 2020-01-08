@@ -16,7 +16,7 @@ class SearchBar extends Component {
 			console.log(event.target.value);
 			var bset = event.target.value.replace('https://osu.ppy.sh/beatmapsets/','');
 			bset = bset.slice(0,bset.indexOf('#osu'));
-			window.location.href = '/beatmap?bsetid='+bset
+			window.location.href = '/beatmap?bsetid='+bset;
 		}
 
 	}
