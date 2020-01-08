@@ -7,6 +7,7 @@ import Showcase from './components/Showcase';
 import StaticNavBar from './components/StaticNavBar';
 import Beatmap from './components/Beatmap';
 import SearchBar from './components/SearchBar';
+import NotFound from './components/NotFound';
 import './index.css';
 import {
 	BrowserRouter as Router,
@@ -26,8 +27,11 @@ function App() {
 				<Route path='/search'>
 					<SearchBar/>
 				</Route>
-				<Route path='/'>
+				<Route path='/' exact>
 					<Home />
+				</Route>
+				<Route path='/'>
+					<NotFound/>
 				</Route>
 			</Switch>
 		</Router >
