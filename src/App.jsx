@@ -24,7 +24,7 @@ function App() {
 				<Route path="/beatmap">
 					<BeatmapStats />
 				</Route>
-				<Route>
+				<Route path='/search'>
 					<SearchBar/>
 				</Route>
 				<Route path='/'>

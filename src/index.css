@@ -143,3 +143,44 @@ html, body {
 	display: block;
 	margin: auto;
 }
+
+.center-div {
+	position: absolute;
+	top:50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.created-by img {
+	width: 4rem;
+	border-radius: 50%;
+}
+
+.created-by p {
+	margin: 0;
+}
+
+.footer {
+	padding: 1rem 5rem;
+	background-color: #242d47;
+}
+
+.footer-section {
+	display: inline-block;
+	width: 33%;
+	vertical-align: top;
+	text-align: center;
+	
+}
+
+.footer-section ul li {
+	list-style-type: none;
+}
+.footer-section a {
+	display: block;
+	color: white;
+}
+
+.footer-title {
+	margin-bottom: 1rem;
+}
