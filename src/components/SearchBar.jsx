@@ -12,7 +12,7 @@ class SearchBar extends Component {
 	}
 
 	handleKeyDown(event) {
-		if (event.key == 'Enter') {
+		if (event.key === 'Enter') {
 			console.log(event.target.value);
 			var bset = event.target.value.replace('https://osu.ppy.sh/beatmapsets/','');
 			bset = bset.slice(0,bset.indexOf('#osu'));

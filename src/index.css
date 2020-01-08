@@ -1,3 +1,8 @@
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+  }
+
 html, body {
 	overflow-x:hidden;
 	margin: 0;
@@ -134,7 +139,7 @@ html, body {
 	width:50%;
 }
 
-.three-sections {
+.three-section {
 	display:inline-block;
 	width:33%;
 }
@@ -183,4 +188,27 @@ html, body {
 
 .footer-title {
 	margin-bottom: 1rem;
+}
+
+.loader {
+	border: 8px solid #242d47; /* Light grey */
+	border-top: 8px solid #6d83ff; /* Blue */
+	border-radius: 50%;
+	width: 3rem;
+	height: 3rem;
+	animation: spin 1s linear infinite;
+	position: absolute;
+	top:0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+}
+
+.loader-container {
+	overflow: hidden;
+	position: absolute;
+	width:100%;
+	height:100%;
+	top:0;
 }
