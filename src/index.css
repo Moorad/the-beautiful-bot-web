@@ -1,39 +1,61 @@
 @keyframes spin {
-	0% { transform: rotate(0deg); }
-	100% { transform: rotate(360deg); }
-  }
+	0% {
+		transform: rotate(0deg);
+	}
 
-html, body {
-	overflow-x:hidden;
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes grow {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+html,
+body {
+	overflow-x: hidden;
 	margin: 0;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Roboto ,Arial, Helvetica, sans-serif;
 	background-color: #141927;
-	color:white;
+	color: white;
 }
 
 .nav {
 	margin: 0;
 	background-color: #242d47;
-	height: 2rem;
+	height: 3.5rem;
 	width: 100%;
 	position: fixed;
 	display: none;
-	top:0	
+	top: 0;
+	z-index: 999;
+	padding: 0.5rem;
 }
 
 .static-nav {
 	margin: 1rem;
-	height:5rem;
+	height: 5rem;
 }
 
 .nav-item {
 	display: inline-block;
-	
+	margin-top: 5px;
 	padding: 0.8rem 1.4rem;
 	margin-right: 1rem;
 	color: white;
 	text-decoration: none;
 	border-radius: 4px;
+}
+
+.nav-item:hover {
+	background-color: #242d47;
 }
 
 .current {
@@ -47,9 +69,11 @@ html, body {
 
 .tight-section {
 	margin: 0 25%;
+	min-height: 100vh;
 }
 
-.title, .beatmap-title{
+.title,
+.beatmap-title {
 	font-family: Baloo Bhai;
 	font-size: 2.5rem;
 }
@@ -57,7 +81,7 @@ html, body {
 .sub-title {
 	font-family: Baloo Bhai;
 	font-size: 1.5rem;
-} 
+}
 
 .beatmap-title {
 	margin-bottom: 0;
@@ -70,7 +94,7 @@ html, body {
 }
 
 .main-logo {
-	width:18rem;
+	width: 18rem;
 	border-radius: 50%;
 	display: block;
 	margin: auto;
@@ -79,17 +103,17 @@ html, body {
 
 .beatmap-img {
 	display: block;
-	width:100%;
+	width: 100%;
 	margin: auto;
 	border-radius: 100px 0 100px 0;
-	border:2px solid white;
+	border: 2px solid white;
 }
 
 .search-bar {
 	display: block;
 	margin: auto;
 	width: calc(100% - 4rem);
-	border:2px solid #242d47;
+	border: 2px solid #242d47;
 	font-size: 1.2rem;
 	padding: 1rem 2rem;
 	color: white;
@@ -104,7 +128,7 @@ html, body {
 
 .search-option {
 	background-color: #242d47;
-	width:50%;
+	width: 50%;
 	display: inline-block;
 	text-align: center;
 }
@@ -114,7 +138,7 @@ html, body {
 }
 
 .right {
-	float:right;
+	float: right;
 }
 
 .special {
@@ -123,14 +147,14 @@ html, body {
 	color: white;
 	text-decoration: none;
 	border-radius: 4px;
-	border:0;
+	border: 0;
 }
 
 .progress-bar-container {
 	display: inline-block;
 	width: 70%;
 	height: 12px;
-	background-color: rgba(255,255,255,0.2);
+	background-color: rgba(255, 255, 255, 0.2);
 	border-radius: 8px;
 }
 
@@ -140,13 +164,13 @@ html, body {
 }
 
 .two-section {
-	display:inline-block;
-	width:50%;
+	display: inline-block;
+	width: 50%;
 }
 
 .three-section {
-	display:inline-block;
-	width:33%;
+	display: inline-block;
+	width: 33%;
 }
 
 .aimSpeedStrain * {
@@ -156,7 +180,7 @@ html, body {
 
 .center-div {
 	position: absolute;
-	top:50%;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 }
@@ -180,12 +204,13 @@ html, body {
 	width: 33%;
 	vertical-align: top;
 	text-align: center;
-	
+
 }
 
 .footer-section ul li {
 	list-style-type: none;
 }
+
 .footer-section a {
 	display: block;
 	color: white;
@@ -196,14 +221,16 @@ html, body {
 }
 
 .loader {
-	border: 8px solid #242d47; /* Light grey */
-	border-top: 8px solid #6d83ff; /* Blue */
+	border: 8px solid #242d47;
+	/* Light grey */
+	border-top: 8px solid #6d83ff;
+	/* Blue */
 	border-radius: 50%;
 	width: 3rem;
 	height: 3rem;
 	animation: spin 1s linear infinite;
 	position: absolute;
-	top:0;
+	top: 0;
 	bottom: 0;
 	right: 0;
 	left: 0;
@@ -213,9 +240,10 @@ html, body {
 .loader-container {
 	overflow: hidden;
 	position: absolute;
-	width:100%;
-	height:100%;
-	top:0;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background-color: #141927;
 }
 
 .not-found-img {
@@ -224,4 +252,53 @@ html, body {
 
 a {
 	text-decoration: none;
+	color: #6d83ff
+}
+
+.nav-img {
+	width: 3rem;
+	border-radius: 50%;
+}
+
+.nav-img-item {
+	display: inline-block;
+	float: left;
+	margin-right: 1rem;
+
+}
+
+.dev-build {
+	background: repeating-linear-gradient(45deg,
+			#F8CA1E,
+			#F8CA1E 10px,
+			#161615 10px,
+			#161615 20px);
+	height: 5px;
+}
+
+.dev-text {
+	margin: 5px;
+}
+
+.star {
+	display: inline-block;
+	animation: grow 500ms;
+}
+
+.star-container {
+	display: inline-block;
+}
+
+.showcase-text-container,.showcase-img {
+	width:50%;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.showcase-title {
+	font-family: Baloo bhai;
+}
+
+.showcase-description {
+
 }

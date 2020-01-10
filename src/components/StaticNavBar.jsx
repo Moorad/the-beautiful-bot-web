@@ -4,7 +4,7 @@ class StaticNavBar extends Component {
 	render() {
 		return (
 			<div className='static-nav'>
-				<div className='nav-item current'>Home</div>
+				<a href="/"><div className='nav-img-item'><img className='nav-img' src="https://cdn.discordapp.com/avatars/647218819865116674/30bf8360b8a5adef5a894d157e22dc34.png?size=512" alt=""/></div></a>
 				<Link to='/commands'><div className='nav-item'>Commands</div></Link>
 				<Link to='/search'><div className='nav-item'>Stats</div></Link>
 				<Link to='/changelog'><div className='nav-item'>Changelog</div></Link>

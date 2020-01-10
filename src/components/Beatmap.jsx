@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Line, Pie } from 'react-chartjs-2';
 import ProgressBar from './ProgressBar';
 import Loader from './Loader';
+import StarBar from './StarBar';
 class Beatmap extends Component {
 	constructor() {
 		super();
@@ -40,7 +41,7 @@ class Beatmap extends Component {
 			return <Loader />;
 		}
 		var data = (canvas) => {
-			const ctx = canvas.getContext("2d")
+			const ctx = canvas.getContext('2d')
 			const gradient = ctx.createLinearGradient(0, 0, 0, 300);
 			gradient.addColorStop(0, this.state.colours.foreground + 'FF');
 			gradient.addColorStop(1, this.state.colours.foreground + '00');
@@ -67,13 +68,13 @@ class Beatmap extends Component {
 		return (
 			<div className='tight-section'>
 				<select className='diff-select' onChange={this.changeDifficulty}>
-					{this.state.diffs.map((diff, i) => { return (<option value={i}>{diff}</option>) })}
+					{this.state.diffs.map((diff, i) => { return (<option value={i} key={i}>{diff}</option>) })}
 				</select>
 				<img className='beatmap-img' src={`https://assets.ppy.sh/beatmaps/${this.state.beatmapset_id}/covers/cover@2x.jpg`} alt="" />
 				<p className='beatmap-title'>{this.state.title} [{this.approved[parseInt(this.state.approved) + 2]}]</p>
 				<p className='beatmap-sub-title'>By {this.state.artist}</p>
 				<p className='beatmap-sub-title'>Mapped by {this.state.creator}</p>
-				<p className='beatmap-sub-title'>Stars: ★★★★★★★★★★ [{Math.round(this.state.difficultyrating * 100) / 100}]</p>
+				<p className='beatmap-sub-title'>Stars: <StarBar stars={Math.round(this.state.difficultyrating * 100)/100}/> [{Math.round(this.state.difficultyrating * 100) / 100}]</p>
 				<div className='two-section'>
 					<div className='beatmap-sub-title'>CS: <ProgressBar max={7} min={2} value={this.state.diff_size} /> [{this.state.diff_size}]</div>
 					<div className='beatmap-sub-title'>AR: <ProgressBar max={10} min={0} value={this.state.diff_approach} /> [{this.state.diff_approach}]</div>
@@ -83,16 +84,14 @@ class Beatmap extends Component {
 					<div className='beatmap-sub-title'>OD: <ProgressBar max={10} min={0} value={this.state.diff_overall} /> [{this.state.diff_overall}]</div>
 				</div>
 				<div className='three-section beatmap-sub-title center'>
-					Max Combo: {this.state.max_combo}x
+				<i class="fas fa-times"></i> {this.state.max_combo}x
 				</div>
 				<div className='three-section beatmap-sub-title center'>
-					BPM: {this.state.bpm} bpm
+				<i class="fas fa-drum"></i> {this.state.bpm} bpm
 				</div>
 				<div className='three-section beatmap-sub-title center'>
-					{Math.floor(this.state.total_length / 60)}:{(this.state.total_length % 60 < 10 ? '0' : '') + (this.state.hit_length % 60)} ({Math.floor(this.state.hit_length / 60)}:{(this.state.hit_length % 60 < 10 ? '0' : '') + (this.state.hit_length % 60)} Drain time)
+				<i class="fas fa-clock"></i> {Math.floor(this.state.total_length / 60)}:{(this.state.total_length % 60 < 10 ? '0' : '') + (this.state.hit_length % 60)} ({Math.floor(this.state.hit_length / 60)}:{(this.state.hit_length % 60 < 10 ? '0' : '') + (this.state.hit_length % 60)} Drain time)
 				</div>
-				<div>Rating</div>
-				<div>★★★★★★</div>
 				<div>
 					<div className='aimSpeedStrain center'>
 						<Line height={100} redraw={true} data={data} options={{
@@ -112,9 +111,11 @@ class Beatmap extends Component {
 						}} />
 						<p>Note: This graph is showing the speed and aim strain values. Aim refers to parts in the map where there are relativly big spacing between objects (For example jumps). Speed refers to the parts where you are required to click the circles in a short amount of time (For example streams and bursts)</p>
 					</div>
-					<div className="three-section beatmap-sub-title center">Favourites: {this.state.favourite_count}</div>
-					<div className="three-section beatmap-sub-title center">Plays: {this.state.playcount}</div>
-					<div className="three-section beatmap-sub-title center">Passes: {this.state.passcount}</div>
+					<div>Rating</div>
+					<div><StarBar stars={this.state.rating}/></div>
+					<div className="three-section beatmap-sub-title center"><i class="fas fa-heart"></i> {this.state.favourite_count}</div>
+					<div className="three-section beatmap-sub-title center"><i class="fas fa-play"></i> {this.state.playcount}</div>
+					<div className="three-section beatmap-sub-title center"><i class="fas fa-check"></i> {this.state.passcount}</div>
 					<Pie data={{
 						labels:['Failed','Passed','Aim','Speed'],
 						datasets:[{
@@ -140,7 +141,7 @@ class Beatmap extends Component {
 		var urlParams = new URLSearchParams(window.location.search);
 		fetch(`${server}/api/colours?link=${`https://assets.ppy.sh/beatmaps/${urlParams.get('bsetid')}/covers/cover@2x.jpg`}`, { method: 'GET' }).then(res => res.json()).then(json => {
 			console.log(json)
-			document.body.style.backgroundColor = json.background;
+			// document.body.style.backgroundColor = json.background;
 			document.body.style.color = json.foreground;
 			document.getElementsByClassName('beatmap-img')[0].style.borderColor = json.foreground;
 			for (var i = 0; i < document.getElementsByClassName('progress-bar').length; i++) {

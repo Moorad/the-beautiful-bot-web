@@ -4,9 +4,12 @@ class Showcase extends Component {
 	render() {
 		return (
 			<div>
-					<p>{this.props.title}</p>
-					<img src={this.props.url} alt=""/>
-					<p>{this.props.description}</p>
+				<div className='showcase-text-container'>
+					<p className='showcase-title'>{this.props.title}</p>
+					<p className='showcase-description'>{this.props.description}</p>
+					</div>
+					<img src={this.props.url} className='showcase-img' alt=""/>
+					
 				</div>
 		);
 	}

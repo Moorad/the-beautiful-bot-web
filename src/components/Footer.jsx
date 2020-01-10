@@ -5,7 +5,7 @@ class Footer extends Component {
 		return (
 			<div className='footer'>
 				<div className='created-by center'>
-					<img src="https://i.imgur.com/LhcenlS.jpg" alt=""/><p>Made with ❤ by Moorad</p>
+					<img src="https://i.imgur.com/LhcenlS.jpg" alt=""/><p>Made with <span style={{color:'#e30e3f'}}>❤</span> by Moorad</p>
 				</div>
 				<div className='footer-section'>
 					<ul>
@@ -28,11 +28,11 @@ class Footer extends Component {
 						<a href=""><li>API Documentation</li></a>
 					</ul>
 				</div>
-				<div className='footer-bottom'>
-					<a href="">[Github]</a>
-					<a href="">[Osu]</a>
-					<a href="">[Discord]</a>
-					<a href="">[Email]</a>
+				<div className='footer-bottom center'>
+					<a href="https://github.com/moorad"><i class="fab fa-github"></i></a>
+					<a href="https://osu.ppy.sh/users/14392546">[Osu]</a>
+					<i class="fab fa-discord"></i>
+					<i class="fas fa-envelope"></i>
 				</div>
 			</div>
 		)
