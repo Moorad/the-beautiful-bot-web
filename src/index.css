@@ -18,6 +18,36 @@
 	}
 }
 
+@keyframes grow25 {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(0.25);
+	}
+}
+
+@keyframes grow50 {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(0.5);
+	}
+}
+
+@keyframes grow75 {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(0.75);
+	}
+}
+
 html,
 body {
 	overflow-x: hidden;
@@ -159,8 +189,13 @@ body {
 }
 
 .progress-bar {
+	width: 0;
+	transition: width 500ms;
 	height: 12px;
 	border-radius: 8px;
+	
+	background-color: white;
+	
 }
 
 .two-section {
@@ -282,7 +317,28 @@ a {
 
 .star {
 	display: inline-block;
+}
+
+.star100 {
 	animation: grow 500ms;
+	transform: scale(1);
+}
+
+.star75 {
+	animation: grow75 500ms;
+	transform: scale(0.75);
+
+}
+
+.star50 {
+	animation: grow50 500ms;
+	transform: scale(0.5);
+
+}
+
+.star25 {
+	animation: grow25 500ms;
+	transform: scale(0.25);
 }
 
 .star-container {
@@ -301,4 +357,66 @@ a {
 
 .showcase-description {
 
+}
+
+.player-img {
+	display: inline-block;
+	float: left;
+	width: 10rem;
+}
+
+.player-info {
+	display: inline-block;
+
+	height: 10rem;
+}
+
+.player-flag {
+	height: 1.5rem;
+	margin-right: 1rem;
+	
+}
+
+.player-info div {
+	line-height: 5rem;
+	font-family: Baloo Bhai;
+	margin: 0;
+	height: 5rem;
+	vertical-align: middle;	
+}
+
+.player-name {
+	font-size: 2rem;
+}
+
+.player-country {
+	display: inline-block;
+	font-size: 2rem;
+}
+
+.player-top-container {
+	height: 10rem;
+	display: inline-block;
+}
+
+.five-section {
+	width:20%;
+	display: inline-block;
+}
+
+.player-grade-img img {
+	width:30%;
+}
+
+.popup {
+	position: fixed;
+	top:0;
+	width: 100%;
+	padding: 0rem;
+	z-index: 9999;
+	border-radius: 0 0 10px 10px;
+}
+
+.popup * {
+	margin: 1rem;
 }

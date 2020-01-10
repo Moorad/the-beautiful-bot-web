@@ -16,13 +16,24 @@ class StarBar extends Component {
 	render() {
 		console.log('rendered')
 		var array = [];
-		for (var i = 0;i < this.state.stars;i++) {
+		var lastStar;
+		for (var i = 0;i < Math.floor(this.state.stars);i++) {
 			array.push(i);
 		}
-		console.log(this.state.stars)
+		console.log(this.state.stars - Math.floor(this.state.stars))
+		if (Math.floor(this.state.stars) < this.state.stars) {
+			if (this.state.stars - Math.floor(this.state.stars) < 0.35) {
+				lastStar = <Star className='star star25'  index={Math.floor(this.state.stars)}/>;
+			} else if (this.state.stars - Math.floor(this.state.stars) < 0.60) {
+				lastStar = <Star className='star star50' index={Math.floor(this.state.stars)}/>;
+			} else {
+				lastStar = <Star className='star star75' index={Math.floor(this.state.stars)}/>;
+			}
+		}
 	return (
 	<div className='star-container'>
-		{array.map((elem,i) => <Star index={i} key={i}/>)}
+		{array.map((elem,i) => <Star className='star star100' index={i} key={i}/>)}
+		{lastStar}
 	</div>);
 	}
 }
@@ -32,13 +43,23 @@ class Star extends Component {
 		super(props);
 		this.state = {
 			render:<div></div>,
-			time:this.props.index*50
+			time:this.props.index*50,
+			classes:this.props.className
 		};
+	}
+
+	componentWillReceiveProps(newProps) {
+		if (newProps != this.props) {
+			this.setState({
+				time:newProps.time,
+				classes:newProps.classes
+			})
+		}
 	}
 
 	componentDidMount() {
 		setTimeout(function() {
-			this.setState({render:<div className='star'><i class="fas fa-star"></i></div>});
+			this.setState({render:<div className={this.state.classes}><i class="fas fa-star"></i></div>});
 		}.bind(this),this.state.time)
 	}
 

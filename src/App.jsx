@@ -9,6 +9,8 @@ import Beatmap from './components/Beatmap';
 import SearchBar from './components/SearchBar';
 import NotFound from './components/NotFound';
 import Changelog from './components/Changelog';
+import Player from './components/Player';
+import PopUp from './components/PopUp';
 import './index.css';
 import {
 	BrowserRouter as Router,
@@ -21,9 +23,13 @@ function App() {
 		<Router>
 			<NavBar />
 			<StaticNavBar />
+			{/* <PopUp/> */}
 			<Switch>
 				<Route path="/beatmap">
 					<BeatmapStats />
+				</Route>
+				<Route path='/player'>
+				<Player/>
 				</Route>
 				<Route path='/search'>
 					<SearchBar/>
