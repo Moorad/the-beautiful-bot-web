@@ -5,7 +5,8 @@ import GradeS from '../assets/grade_s.png';
 import GradeSH from '../assets/grade_sh.png';
 import GradeSS from '../assets/grade_ss.png';
 import GradeSSH from '../assets/grade_ssh.png';
-
+import ProgressBar from './ProgressBar';
+import {Bar} from 'react-chartjs-2';
 class Player extends Component {
 	constructor() {
 		super();
@@ -21,13 +22,23 @@ class Player extends Component {
 			json.loading = false;
 			this.setState(json)
 		})
+
+		fetch(`${process.env.REACT_APP_SERVER}/api/best?osukey=${process.env.REACT_APP_OSU_KEY}&user=${urlParams.get('user')}`).then(res => res.json()).then(json => {
+			console.log(json)
+		})
 	}
 
 	render() {
 		if (this.state.loading) {
 			return <Loader />;
 		}
-
+		this.colours();
+		var labels = Object.keys(this.state.computedData.mods)
+		var datasets = []
+		for (var i = 0;i < labels.length;i++) {
+			datasets.push({label:labels[i],data:Object.values(this.state.computedData.mods)[i]});
+		}
+		console.log(datasets)
 		return (
 			<div className='tight-section'>
 				<div style={{ textAlign: 'center' }}>
@@ -43,38 +54,64 @@ class Player extends Component {
 					</div>
 				</div>
 				<div>
-					<div className='two-section center'>Global Rank: #{this.state.pp_rank}</div>
-					<div className='two-section center'>Country Rank: #{this.state.pp_country_rank}</div>
+					<div className='two-section center beatmap-sub-title'>Global Rank: #{this.state.pp_rank}</div>
+					<div className='two-section center beatmap-sub-title'>Country Rank: #{this.state.pp_country_rank}</div>
 
-					<div className="three-section center">{this.state.accuracy}</div>
-					<div className="three-section center">{this.state.pp_raw}</div>
-					<div className="three-section center">{this.state.total_seconds_played}</div>
+					<div className="three-section center beatmap-sub-title">{Math.floor(this.state.accuracy * 100)/100}%</div>
+					<div className="three-section center beatmap-sub-title">{Math.floor(this.state.pp_raw)}pp</div>
+					<div className="three-section center beatmap-sub-title">{Math.floor((this.state.total_seconds_played/60/60) * 10)/10}h</div>
 
-					<div className="five-section center">
+					<div className="five-section center beatmap-sub-title">
 						<div className='player-grade-img'><img src={GradeA} alt=""/></div>
-						{this.state.count_rank_ssh}
+						{this.state.count_rank_a}
 					</div>
-					<div className="five-section center">
+					<div className="five-section center beatmap-sub-title">
 						<div className='player-grade-img'><img src={GradeS} alt=""/></div>
-						{this.state.count_rank_ss}
+						{this.state.count_rank_s}
 					</div>
-					<div className="five-section center">
+					<div className="five-section center beatmap-sub-title">
 						<div className='player-grade-img'><img src={GradeSH} alt=""/></div>
 						{this.state.count_rank_sh}
 					</div>
-					<div className="five-section center">
+					<div className="five-section center beatmap-sub-title">
 						<div className='player-grade-img'><img src={GradeSS} alt=""/></div>
-						{this.state.count_rank_s}
+						{this.state.count_rank_ss}
 					</div>
-					<div className="five-section center">
+					<div className="five-section center beatmap-sub-title">
 						<div className='player-grade-img'><img src={GradeSSH} alt=""/></div>
-						{this.state.count_rank_a}
+						{this.state.count_rank_ssh}
+					</div>
+					<div className='center beatmap-sub-title'>
+						Level: {Math.floor(this.state.level)} <ProgressBar max={1} min={0} value={this.state.level - Math.floor(this.state.level)}/>
+					</div>
+					<div>
+						<Bar data={{
+							labels: Object.keys(this.state.computedData.mods),
+							datasets:[{label:'data',data:Object.values(this.state.computedData.mods),backgroundColor:this.state.colours.background}]
+						}}/>
 					</div>
 				</div>
 			</div>
 		);
 	}
 
+	colours() {
+		var urlParams = new URLSearchParams(window.location.search);
+		fetch(`${process.env.REACT_APP_SERVER}/api/colours?link=${`https://a.ppy.sh/${urlParams.get('user')}`}`, { method: 'GET' }).then(res => res.json()).then(json => {
+			console.log(json)
+			// document.body.style.backgroundColor = json.background;
+			// document.body.style.color = json.foreground;
+			// document.getElementsByClassName('beatmap-img')[0].style.borderColor = json.foreground;
+			// for (var i = 0; i < document.getElementsByClassName('progress-bar').length; i++) {
+			// 	document.getElementsByClassName('progress-bar')[i].style.background = json.foreground;
+			// 	document.getElementsByClassName('progress-bar-container')[i].style.background = json.foreground + '33';
+			// }
+			// document.getElementsByClassName('special')[0].style.backgroundColor = json.foreground;
+			// document.getElementsByClassName('special')[0].style.color = '#ffffff';
+			this.setState({ colours: { background: json.background, foreground: json.foreground } })
+		});
+	}
+	
 }
 
 export default Player;

@@ -4,7 +4,6 @@ import MainTBB from './components/MainTBB';
 import About from './components/About';
 import Footer from './components/Footer';
 import Showcase from './components/Showcase';
-import StaticNavBar from './components/StaticNavBar';
 import Beatmap from './components/Beatmap';
 import SearchBar from './components/SearchBar';
 import NotFound from './components/NotFound';
@@ -22,7 +21,6 @@ function App() {
 	return (
 		<Router>
 			<NavBar />
-			<StaticNavBar />
 			{/* <PopUp/> */}
 			<Switch>
 				<Route path="/beatmap">
