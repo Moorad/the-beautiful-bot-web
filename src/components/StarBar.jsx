@@ -58,9 +58,7 @@ class Star extends Component {
 	}
 
 	componentDidMount() {
-		setTimeout(function() {
 			this.setState({render:<div className={this.state.classes}><i class="fas fa-star"></i></div>});
-		}.bind(this),this.state.time)
 	}
 
 	render() {

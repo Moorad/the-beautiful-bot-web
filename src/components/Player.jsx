@@ -27,6 +27,7 @@ class Player extends Component {
 			console.log(json)
 			json.loading = false;
 			this.setState(json)
+			// this.colours();
 		})
 
 		fetch(`${process.env.REACT_APP_SERVER}/api/best?osukey=${process.env.REACT_APP_OSU_KEY}&user=${urlParams.get('user')}`).then(res => res.json()).then(json => {
@@ -42,7 +43,7 @@ class Player extends Component {
 		if (this.state.loading) {
 			return <Loader />;
 		}
-		this.colours();
+		// this.colours();
 		var labels = Object.keys(this.state.computedData.mods)
 		var datasets = []
 		for (var i = 0;i < labels.length;i++) {
@@ -62,7 +63,7 @@ class Player extends Component {
 		console.log(modCombo)
 		var elements;
 		return (
-			<div className='tight-section'>
+			<div className='tight-section player-container'>
 				<div style={{ textAlign: 'center' }}>
 					<div className='player-top-container'>
 						<img className='player-img' src={`https://a.ppy.sh/${this.state.user_id}`} alt="" />
@@ -118,7 +119,7 @@ class Player extends Component {
 					<div>
 						<Pie data={{
 							labels: ['FCs','Chokes','Other plays'],
-							datasets:[{label:'Number of plays',data:[this.state.computedData.FCs,this.state.computedData.chokes,this.state.computedData.other],backgroundColor:['#ff333388','#3333ff88','#33ff3388']}]
+							datasets:[{label:'Number of plays',data:[this.state.computedData.FCs,this.state.computedData.chokes,this.state.computedData.other],backgroundColor:[this.state.colours.foreground,this.state.colours.foreground,this.state.colours.foreground]}]
 						}}/>
 					</div>
 
@@ -129,11 +130,9 @@ class Player extends Component {
 	}
 
 	colours() {
-		var urlParams = new URLSearchParams(window.location.search);
-		fetch(`${process.env.REACT_APP_SERVER}/api/colours?link=${`https://a.ppy.sh/${urlParams.get('user')}`}`, { method: 'GET' }).then(res => res.json()).then(json => {
-			console.log(json)
-			// document.body.style.backgroundColor = json.background;
-			// document.body.style.color = json.foreground;
+		// var urlParams = new URLSearchParams(window.location.search);
+			var container = document.getElementsByClassName('player-container')[0]
+			container.style.color = this.state.colours.foreground;
 			// document.getElementsByClassName('beatmap-img')[0].style.borderColor = json.foreground;
 			// for (var i = 0; i < document.getElementsByClassName('progress-bar').length; i++) {
 			// 	document.getElementsByClassName('progress-bar')[i].style.background = json.foreground;
@@ -141,8 +140,7 @@ class Player extends Component {
 			// }
 			// document.getElementsByClassName('special')[0].style.backgroundColor = json.foreground;
 			// document.getElementsByClassName('special')[0].style.color = '#ffffff';
-			this.setState({ colours: { background: json.background, foreground: json.foreground } })
-		});
+			// this.setState({ colours: { background: json.background, foreground: json.foreground } })
 	}
 	
 }

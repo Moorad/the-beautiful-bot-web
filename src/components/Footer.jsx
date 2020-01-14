@@ -29,10 +29,9 @@ class Footer extends Component {
 					</ul>
 				</div>
 				<div className='footer-bottom center'>
-					<a href="https://github.com/moorad"><i class="fab fa-github"></i></a>
-					<a href="https://osu.ppy.sh/users/14392546">[Osu]</a>
-					<i class="fab fa-discord"></i>
-					<i class="fas fa-envelope"></i>
+					<a href="https://github.com/moorad">Github </a>
+					<a href="https://osu.ppy.sh/users/14392546">osu! </a>
+					<a href="https://discord.gg/GZ85bKS">Discord</a>
 				</div>
 			</div>
 		)

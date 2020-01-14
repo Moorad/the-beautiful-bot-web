@@ -64,8 +64,8 @@ function Home() {
 			<div className='tight-section'>
 				<About />
 				<Showcase title='Show your most recent play' url='https://i.imgur.com/3eZouLn.png' description='With the beautiful bot you can show your most recent play to your friends and other server members. The recent play shows detailed data about your play like the amount of pp given, the amount of pp for an FC with the given accuracy and the completion percentage if the user failed' />
-				<Showcase left={true} title='User information' url='https://i.imgur.com/nZtvoDt.png' description='The bot can show your top 5 best pp plays. The bot would show information such as your combo, 100s 50s and misses and when is the play achieved. Its a pretty good way to flex on your fellow server members' />
-				<Showcase title='Beatmap Details' url='https://i.imgur.com/fPFsvv4.png' description='Hello this is a description' />
+				<Showcase left={true} title='User information' url='https://i.imgur.com/4mbVbjr.png' description='The beautiful bot can show stats about the given user. it can show there rank, amount of pp, accuracy, level and more!' />
+				<Showcase title='Beatmap Details' url='https://i.imgur.com/fPFsvv4.png' description='The bot is able to generate cards to show the stats of a map. The bot can show information CS, AR, HP, OD, BPM, Combo and even the amount of pp for a 100%, 95% and 90% FC' />
 			</div>
 		</div>
 	)
