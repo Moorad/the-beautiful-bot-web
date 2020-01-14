@@ -25,7 +25,7 @@ class Footer extends Component {
 				<div className='footer-section'>
 					<ul>
 						<li className='footer-title'>API</li>
-						<a href=""><li>API Documentation</li></a>
+						<a href="https://github.com/Moorad/the-beautiful-bot-api/wiki"><li>API Documentation</li></a>
 					</ul>
 				</div>
 				<div className='footer-bottom center'>
