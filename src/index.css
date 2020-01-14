@@ -1,34 +1,94 @@
-html, body {
-	overflow-x:hidden;
-	margin: 0;
-	font-family: Arial, Helvetica, sans-serif;
-	background-color: #141927;
-	color:white;
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+
+	100% {
+		transform: rotate(360deg);
+	}
 }
 
+@keyframes grow {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes grow25 {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(0.25);
+	}
+}
+
+@keyframes grow50 {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(0.5);
+	}
+}
+
+@keyframes grow75 {
+	0% {
+		transform: scale(0);
+	}
+
+	100% {
+		transform: scale(0.75);
+	}
+}
+
+html,
+body {
+	overflow-x: hidden;
+	margin: 0;
+	font-family: Rubik ,Arial, Helvetica, sans-serif;
+	background-color: #141927;
+	color: white;
+}
+/* 
 .nav {
 	margin: 0;
 	background-color: #242d47;
-	height: 2rem;
+	height: 3.5rem;
 	width: 100%;
 	position: fixed;
 	display: none;
-	top:0
-}
+	top: 0;
+	z-index: 999;
+	padding: 0.5rem;
+} */
 
-.static-nav {
-	margin: 1rem;
-	height:5rem;
+.nav {
+	padding: 1rem ;
+	/* height: 5rem; */
+	width:calc(100% - 2rem);
+	z-index: 999;
+	transition: 0.3s;
 }
 
 .nav-item {
 	display: inline-block;
-	
+	margin-top: 5px;
 	padding: 0.8rem 1.4rem;
 	margin-right: 1rem;
 	color: white;
 	text-decoration: none;
 	border-radius: 4px;
+}
+
+.nav-item:hover {
+	background-color: #242d47;
 }
 
 .current {
@@ -42,9 +102,11 @@ html, body {
 
 .tight-section {
 	margin: 0 25%;
+	min-height: 100vh;
 }
 
-.title {
+.title,
+.beatmap-title {
 	font-family: Baloo Bhai;
 	font-size: 2.5rem;
 }
@@ -52,24 +114,365 @@ html, body {
 .sub-title {
 	font-family: Baloo Bhai;
 	font-size: 1.5rem;
-} 
+}
+
+.beatmap-title {
+	margin-bottom: 0;
+}
+
+.beatmap-sub-title {
+	font-size: 1.2rem;
+	font-family: Rubik;
+	margin: 1rem 0;
+}
 
 .main-logo {
-	width:18rem;
+	width: 18rem;
 	border-radius: 50%;
 	display: block;
 	margin: auto;
-	border: 6px solid rgb(109, 131, 255);
+	border: 6px solid #6d83ff;
 }
 
 .beatmap-img {
 	display: block;
-	width:100%;
+	width: 100%;
 	margin: auto;
 	border-radius: 100px 0 100px 0;
-	border:2px solid white;
+	border: 2px solid white;
+}
+
+.search-bar {
+	display: block;
+	margin: auto;
+	width: calc(100% - 4rem);
+	border: 2px solid #242d47;
+	font-size: 1.2rem;
+	padding: 1rem 2rem;
+	color: white;
+	background-color: #242d47;
+	border-radius: 10px;
+	outline: none;
+}
+
+.search-bar:focus {
+	border-color: #6d83ff;
+}
+
+.search-option {
+	background-color: #242d47;
+	width: calc(50% - 2rem);
+	padding: 0.5rem;
+	border-radius: 10px;
+	margin: 1rem;
+	display: inline-block;
+	text-align: center;
+	border:2px solid #242d47;
+	color: white;
+	font-family: Rubik;
+	font-size: 1rem;
+	outline: none;
+}
+
+.search-container {
+	text-align: center;
+}
+
+
+.beatmap-active {
+	border:2px solid #6d83ff;
+}
+
+.player-active {
+	border:2px solid #ffd16d;
 }
 
 .center {
 	text-align: center;
 }
+
+.right {
+	float: right;
+}
+
+.special {
+	background-color: #6d83ff;
+	padding: 0.8rem 1.4rem;
+	color: white;
+	text-decoration: none;
+	border-radius: 4px;
+	border: 0;
+}
+
+.progress-bar-container {
+	display: inline-block;
+	width: 70%;
+	height: 12px;
+	background-color: rgba(255, 255, 255, 0.2);
+	border-radius: 8px;
+}
+
+.progress-bar {
+	width: 0;
+	transition: width 500ms;
+	height: 12px;
+	border-radius: 8px;
+	
+	background-color: white;
+	
+}
+
+.two-section {
+	display: inline-block;
+	width: 50%;
+}
+
+.three-section {
+	display: inline-block;
+	width: 33%;
+}
+
+.aimSpeedStrain * {
+	display: block;
+	margin: auto;
+}
+
+.center-div {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.created-by img {
+	width: 4rem;
+	border-radius: 50%;
+}
+
+.created-by p {
+	margin: 0;
+}
+
+.footer {
+	padding: 1rem 5rem;
+	background-color: #242d47;
+}
+
+.footer-section {
+	display: inline-block;
+	width: 33%;
+	vertical-align: top;
+	text-align: center;
+
+}
+
+.footer-section ul li {
+	list-style-type: none;
+}
+
+.footer-section a {
+	display: block;
+	color: white;
+}
+
+.footer-title {
+	margin-bottom: 1rem;
+}
+
+.loader {
+	border: 8px solid #242d47;
+	/* Light grey */
+	border-top: 8px solid #6d83ff;
+	/* Blue */
+	border-radius: 50%;
+	width: 3rem;
+	height: 3rem;
+	animation: spin 1s linear infinite;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin: auto;
+}
+
+.loader-container {
+	overflow: hidden;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	background-color: #141927;
+}
+
+.not-found-img {
+	height: 60vh;
+}
+
+a {
+	text-decoration: none;
+	color: #6d83ff
+}
+
+.nav-img {
+	width: 3rem;
+	border-radius: 50%;
+}
+
+.nav-img-item {
+	display: inline-block;
+	float: left;
+	margin-right: 1rem;
+
+}
+
+.dev-build {
+	background: repeating-linear-gradient(45deg,
+			#F8CA1E,
+			#F8CA1E 10px,
+			#161615 10px,
+			#161615 20px);
+	height: 5px;
+}
+
+.dev-text {
+	margin: 2rem 5px 5px 5px;
+}
+
+.star {
+	display: inline-block;
+}
+
+.star100 {
+	animation: grow 500ms;
+	transform: scale(1);
+}
+
+.star75 {
+	animation: grow75 500ms;
+	transform: scale(0.75);
+
+}
+
+.star50 {
+	animation: grow50 500ms;
+	transform: scale(0.5);
+
+}
+
+.star25 {
+	animation: grow25 500ms;
+	transform: scale(0.25);
+}
+
+.star-container {
+	display: inline-block;
+}
+
+.showcase-text-container,.showcase-img {
+	width:50%;
+	
+	display: inline-block;
+	vertical-align: top;
+}
+
+.showcase-text-container {
+	width:calc(50% - 2rem);
+	padding:1rem;
+}
+
+.showcase-title {
+	font-family: Baloo bhai;
+	font-size:1.3rem;
+	margin:0;
+}
+
+.showcase-img {
+	border-radius: 10px;
+}
+
+.player-img {
+	display: inline-block;
+	float: left;
+	width: 10rem;
+}
+
+.player-info {
+	display: inline-block;
+
+	height: 10rem;
+}
+
+.player-flag {
+	height: 1.5rem;
+	margin-right: 1rem;
+	
+}
+
+.player-info div {
+	line-height: 5rem;
+	font-family: Baloo Bhai;
+	margin: 0;
+	height: 5rem;
+	vertical-align: middle;	
+}
+
+.player-name {
+	font-size: 2rem;
+}
+
+.player-country {
+	display: inline-block;
+	font-size: 2rem;
+}
+
+.player-top-container {
+	height: 10rem;
+	display: inline-block;
+}
+
+.five-section {
+	width:20%;
+	display: inline-block;
+}
+
+.player-grade-img img {
+	width:30%;
+}
+
+.popup {
+	position: fixed;
+	top:0;
+	width: 100%;
+	padding: 0rem;
+	z-index: 9999;
+	border-radius: 0 0 10px 10px;
+}
+
+.popup * {
+	margin: 1rem;
+}
+
+.mod {
+	width: 3rem;
+}
+
+.diff-select {
+	padding: 1rem 0.5rem;
+	border:0;
+	background-color: #242d47;
+	color: white;
+	outline: 0;
+	border-radius: 4px;
+	border-bottom: 2px solid #242d47;
+}
+
+
+/* 
+#66DBFF - Blue
+#FF5BB0 - Pink
+#FFD819 - Yellow
+#000000 - Black
+#845BFF - Purple
+#ABE21F - Green
+ */
