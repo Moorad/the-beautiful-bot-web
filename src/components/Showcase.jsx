@@ -4,11 +4,11 @@ class Showcase extends Component {
 	render() {
 		return (
 			<div>
-				<div className='showcase-text-container'>
-					<p className='showcase-title'>{this.props.title}</p>
-					<p className='showcase-description'>{this.props.description}</p>
-					</div>
-					<img src={this.props.url} className='showcase-img' alt=""/>
+				
+					{this.props.left == true ? <div><img src={this.props.url} className='showcase-img' alt=""/><div className='showcase-text-container' style={{textAlign:'right'}}><p className='showcase-title'>{this.props.title}</p><p className='showcase-description'>{this.props.description}</p></div></div> : <div><div className='showcase-text-container'><p className='showcase-title'>{this.props.title}</p><p className='showcase-description'>{this.props.description}</p></div><img src={this.props.url} className='showcase-img' alt=""/></div>}
+					
+					
+					
 					
 				</div>
 		);

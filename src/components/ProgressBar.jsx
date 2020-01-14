@@ -13,9 +13,9 @@ class ProgressBar extends Component {
 	componentWillReceiveProps(nextProps) {
 		if (this.props !== nextProps) {
 			this.setState({
-				max:this.props.max,
-				min:this.props.min,
-				value:this.props.value
+				max:nextProps.max,
+				min:nextProps.min,
+				value:nextProps.value
 			});
 		}
 	}

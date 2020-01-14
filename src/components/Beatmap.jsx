@@ -3,40 +3,77 @@ import { Line, Pie } from 'react-chartjs-2';
 import ProgressBar from './ProgressBar';
 import Loader from './Loader';
 import StarBar from './StarBar';
+import PopUp from './PopUp';
 class Beatmap extends Component {
 	constructor() {
 		super();
-		this.state = { loading: true, colours: { background: '#ff0000', foreground: '#ffffff' } };
+		this.state = { loading: true, colours: { background: '#ff0000', foreground: '#ffffff' },error:''};
 		this.data = {};
 		this.approved = ['graveyard', 'WIP', 'pending', 'ranked', 'approved', 'qualified', 'loved']
 		this.changeDifficulty = this.changeDifficulty.bind(this);
 	}
 
 	componentDidMount() {
-		var server = 'http://localhost:5000';
 		var urlParams = new URLSearchParams(window.location.search);
-		fetch(`${server}/api/beatmap?osukey=${process.env.REACT_APP_OSU_KEY}&bsetid=${urlParams.get('bsetid')}`, {
+		fetch(`${process.env.REACT_APP_SERVER}/api/beatmap?osukey=${process.env.REACT_APP_OSU_KEY}&bsetid=${urlParams.get('bsetid')}`, {
 			method: 'GET'
 		}).then(res => res.json())
 			.then(json => {
+				if (json.error) {
+					this.setState({error:json.error});
+					return;
+				}
 				console.log(json);
 				this.data = json;
 				json[0].loading = false;
 				json[0].diffs = [];
+				var sortedDiff = [];
 				for (var i of json) {
-					json[0].diffs.push(i.version)
+					json[0].diffs.push(i.version);
+					sortedDiff.push(i.difficultyrating);
 				}
+
+				// sortedDiff = sortedDiff.sort();
+				// for (var i = 0;i < json[0].diffs.length;i++) {
+				// 	for (var j = 0;j < sortedDiff.length;j++) {
+				// 		if (sortedDiff[i] == json[j].difficultyrating) {
+				// 			sortedDiff[i] = json[j].version;
+				// 			break;
+				// 		}
+				// 	}
+				// }
+				// json[0].diffs = sortedDiff;
+				// console.log(sortedDiff)
+				json[0].diffColour = ''
+				if (json[0].difficultyrating < 2) {
+					json[0].diffColour = '#ABE21F';
+				} else if (json[0].difficultyrating < 2.7) {
+					json[0].diffColour = '#66DBFF';
+				} else if (json[0].difficultyrating < 4) {
+					json[0].diffColour = '#FFD819';
+				} else if (json[0].difficultyrating < 5.3) {
+					json[0].diffColour = '#FF5BB0';
+				} else if (json[0].difficultyrating < 6.5) {
+					json[0].diffColour = '#845BFF';
+				} else {
+					json[0].diffColour = '#000000';
+				}
+
 				for (var i = 0; i < json[0].deltaTime.length; i++) {
 					json[0].deltaTime[i] = Math.floor(json[0].deltaTime[i] / 1000) + ' sec';
 					json[0].aim[i] = Math.floor(json[0].aim[i] * 10) / 10
 					json[0].speed[i] = Math.floor(json[0].speed[i] * 10) / 10
 				}
+				console.log(json)
 				this.setState(json[0]);
 				this.colours();
 			});
 	}
 
 	render() {
+		if (this.state.error != '') {
+			return(<div><PopUp value={this.state.error}/><div className='section'></div></div>)
+		}
 		if (this.state.loading) {
 			return <Loader />;
 		}
@@ -66,14 +103,14 @@ class Beatmap extends Component {
 		};
 		var arrSum = arr => arr.reduce((a,b) => a + b, 0)
 		return (
-			<div className='tight-section'>
-				<select className='diff-select' onChange={this.changeDifficulty}>
-					{this.state.diffs.map((diff, i) => { return (<option value={i} key={i}>{diff}</option>) })}
-				</select>
+			<div className='tight-section beatmap-container'>
 				<img className='beatmap-img' src={`https://assets.ppy.sh/beatmaps/${this.state.beatmapset_id}/covers/cover@2x.jpg`} alt="" />
 				<p className='beatmap-title'>{this.state.title} [{this.approved[parseInt(this.state.approved) + 2]}]</p>
 				<p className='beatmap-sub-title'>By {this.state.artist}</p>
 				<p className='beatmap-sub-title'>Mapped by {this.state.creator}</p>
+				<select className='diff-select' onChange={this.changeDifficulty} style={{borderBottomColor:this.state.diffColour}}>
+					{this.state.diffs.map((diff, i) => { return (<option value={i} key={i}>{diff}</option>) })}
+				</select>
 				<p className='beatmap-sub-title'>Stars: <StarBar stars={Math.round(this.state.difficultyrating * 100)/100}/> [{Math.round(this.state.difficultyrating * 100) / 100}]</p>
 				<div className='two-section'>
 					<div className='beatmap-sub-title'>CS: <ProgressBar max={7} min={2} value={this.state.diff_size} /> [{this.state.diff_size}]</div>
@@ -90,7 +127,7 @@ class Beatmap extends Component {
 				<i class="fas fa-drum"></i> {this.state.bpm} bpm
 				</div>
 				<div className='three-section beatmap-sub-title center'>
-				<i class="fas fa-clock"></i> {Math.floor(this.state.total_length / 60)}:{(this.state.total_length % 60 < 10 ? '0' : '') + (this.state.hit_length % 60)} ({Math.floor(this.state.hit_length / 60)}:{(this.state.hit_length % 60 < 10 ? '0' : '') + (this.state.hit_length % 60)} Drain time)
+				<i class="fas fa-clock"></i> {Math.floor(this.state.total_length / 60)}:{(this.state.total_length % 60 < 10 ? '0' : '') + (this.state.total_length % 60)} ({Math.floor(this.state.hit_length / 60)}:{(this.state.hit_length % 60 < 10 ? '0' : '') + (this.state.hit_length % 60)} Drain time)
 				</div>
 				<div>
 					<div className='aimSpeedStrain center'>
@@ -137,21 +174,21 @@ class Beatmap extends Component {
 	}
 
 	colours() {
-		var server = 'http://localhost:5000';
-		var urlParams = new URLSearchParams(window.location.search);
-		fetch(`${server}/api/colours?link=${`https://assets.ppy.sh/beatmaps/${urlParams.get('bsetid')}/covers/cover@2x.jpg`}`, { method: 'GET' }).then(res => res.json()).then(json => {
-			console.log(json)
+		// var server = 'http://localhost:5000';
+		// var urlParams = new URLSearchParams(window.location.search);
+		// fetch(`${server}/api/colours?link=${`https://assets.ppy.sh/beatmaps/${urlParams.get('bsetid')}/covers/cover@2x.jpg`}`, { method: 'GET' }).then(res => res.json()).then(json => {
+		// 	console.log(json)
 			// document.body.style.backgroundColor = json.background;
-			document.body.style.color = json.foreground;
-			document.getElementsByClassName('beatmap-img')[0].style.borderColor = json.foreground;
+			var container = document.getElementsByClassName('beatmap-container')[0]
+			container.style.color = this.state.colours.foreground;
+			document.getElementsByClassName('beatmap-img')[0].style.borderColor = this.state.colours.foreground;
 			for (var i = 0; i < document.getElementsByClassName('progress-bar').length; i++) {
-				document.getElementsByClassName('progress-bar')[i].style.background = json.foreground;
-				document.getElementsByClassName('progress-bar-container')[i].style.background = json.foreground + '33';
+				document.getElementsByClassName('progress-bar')[i].style.background = this.state.colours.foreground;
+				document.getElementsByClassName('progress-bar-container')[i].style.background = this.state.colours.foreground + '33';
 			}
-			document.getElementsByClassName('special')[0].style.backgroundColor = json.foreground;
+			document.getElementsByClassName('special')[0].style.backgroundColor = this.state.colours.foreground;
 			document.getElementsByClassName('special')[0].style.color = '#ffffff';
-			this.setState({ colours: { background: json.background, foreground: json.foreground } })
-		});
+		// });
 	}
 
 	invertColor(hex) {
@@ -181,6 +218,20 @@ class Beatmap extends Component {
 
 	changeDifficulty() {
 		var index = document.getElementsByClassName('diff-select')[0].value;
+		this.data[index].diffColour = ''
+		if (this.data[index].difficultyrating < 2) {
+			this.data[index].diffColour = '#ABE21F';
+		} else if (this.data[index].difficultyrating < 2.7) {
+			this.data[index].diffColour = '#66DBFF';
+		} else if (this.data[index].difficultyrating < 4) {
+			this.data[index].diffColour = '#FFD819';
+		} else if (this.data[index].difficultyrating < 5.3) {
+			this.data[index].diffColour = '#FF5BB0';
+		} else if (this.data[index].difficultyrating < 6.5) {
+			this.data[index].diffColour = '#845BFF';
+		} else {
+			this.data[index].diffColour = '#000000';
+		}
 		this.setState(this.data[index]);
 		this.forceUpdate();
 	}
